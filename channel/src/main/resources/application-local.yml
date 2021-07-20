@@ -1,7 +1,7 @@
 #mysql
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/duolaimei?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://123.207.88.92:3306/duolaimei?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: lubao
     password: 84952139
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -11,6 +11,10 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
+
+#不拦截请求的路径  多个以,隔开
+interceptor:
+  excludePath: /test/**,/abc/**
 
 logging:
   level:

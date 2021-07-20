@@ -17,6 +17,12 @@ public class JsonResult implements Serializable {
         this.message = "成功";
     }
 
+    public JsonResult(Object data,int code,String message) {
+        this.data = data;
+        this.code = code;
+        this.message = message;
+    }
+
     public static JsonResult success(Object data){
         return new JsonResult(data);
     }
