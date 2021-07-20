@@ -1,0 +1,10 @@
+package ${cfg.basePath}.query;
+
+import cn.ag.channel.jsonResult.BaseQuery;
+/**
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+public class ${table.entityName}Query extends BaseQuery{
+}
