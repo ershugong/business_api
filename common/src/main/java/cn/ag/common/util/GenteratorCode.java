@@ -95,6 +95,30 @@ public class GenteratorCode {
                 return parentDir + "/model/" + tableInfo.getEntityName() + ".java";
             }
         });
+        // 调整 service
+        focList.add(new FileOutConfig("/templates/service.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                //domain输出完整路径
+                return parentDir + "/service/" + tableInfo.getServiceName() + ".java";
+            }
+        });
+        // 调整 service
+        focList.add(new FileOutConfig("/templates/serviceImpl.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                //domain输出完整路径
+                return parentDir + "/service/Impl/" + tableInfo.getServiceImplName() + ".java";
+            }
+        });
+        // 调整 mapper
+        focList.add(new FileOutConfig("/templates/mapper.java.vm") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                //domain输出完整路径
+                return parentDir + "/mapper/" + tableInfo.getMapperName() + ".java";
+            }
+        });
         // 调整 xml 生成目录演示
         focList.add(new FileOutConfig("/templates/mapper.xml.vm") {
             @Override
@@ -107,10 +131,10 @@ public class GenteratorCode {
         // 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
         // 放置自己项目的 src/main/resources/templates 目录下, 默认名称一下可以不配置，也可以自定义模板名称
         TemplateConfig tc = new TemplateConfig();
-        tc.setService("/templates/service.java.vm");
-        tc.setServiceImpl("/templates/serviceImpl.java.vm");
+        tc.setService(null);///templates/service.java.vm
+        tc.setServiceImpl(null);//"/templates/serviceImpl.java.vm"
         tc.setEntity(null);
-        tc.setMapper("/templates/mapper.java.vm");
+        tc.setMapper(null);//"/templates/mapper.java.vm"
         tc.setController(null);
         tc.setXml(null);
         // 如上任何一个模块如果设置 空 OR Null 将不生成该模块。
