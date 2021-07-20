@@ -9,7 +9,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/test")
@@ -17,6 +20,9 @@ public class TestController {
 
     @Autowired
     private ITestService testService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @GetMapping("/sayHello")
     public String sayHello(){
@@ -43,5 +49,14 @@ public class TestController {
         Page<Book> page = new Page<Book>(query.getPageIndex(),query.getPageSize());
         IPage pageResult = testService.page(page);
         return JsonResult.success(PageList.restPage(pageResult));
+    }
+
+    @RequestMapping("/redisTest")
+    public JsonResult redisTest(){
+        Book book = new Book();
+        book.setBookName("西游记");
+        book.setPrice(BigDecimal.valueOf(12.05));
+        redisTemplate.opsForValue().set("book",book);
+        return JsonResult.success(redisTemplate.opsForValue().get("book"));
     }
 }
