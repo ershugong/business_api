@@ -1,33 +1,45 @@
 package cn.ag.channel.jsonResult;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
-public class JsonResult implements Serializable {
+public class JsonResult<T> implements Serializable {
     private static final long serialVersionUID = -4699713095477151086L;
 
-    private Object data;
+    @ApiModelProperty(value = "具体数据")
+    private T data;
+    @ApiModelProperty(value = "返回码")
     private Integer code;
+    @ApiModelProperty(value = "返回码信息")
     private String message;
 
     public JsonResult(){}
 
-    public JsonResult(Object data) {
+    public JsonResult(T data) {
         this.data = data;
         this.code = 0;
         this.message = "成功";
     }
 
-    public JsonResult(Object data,int code,String message) {
+    public JsonResult(T data,int code,String message) {
         this.data = data;
         this.code = code;
         this.message = message;
     }
 
-    public static JsonResult success(Object data){
-        return new JsonResult(data);
+    public static <T> JsonResult<T> success(T data){
+        return new JsonResult<T>(data);
     }
 
-    public static JsonResult fail(String message){
+    public static <T> JsonResult<T> fail(String message){
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setCode(-1);
+        jsonResult.setMessage("系统错误，请稍后再试");
+        return jsonResult;
+    }
+
+    public static <T> JsonResult<T> failDefault(){
         JsonResult jsonResult = new JsonResult();
         jsonResult.setCode(-1);
         jsonResult.setMessage("系统错误，请稍后再试");
@@ -38,11 +50,11 @@ public class JsonResult implements Serializable {
         return serialVersionUID;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

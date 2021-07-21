@@ -5,10 +5,17 @@ spring:
   profiles:
     active: local
 
-#mybatis-plus
+#mybatis-plus   全局配置  删除默认采用逻辑删除
 mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: deleted #是否删除字段deleted  0否  1是
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: cn.ag.channel.model
   configuration.map-underscore-to-camel-case: true
+
 
 

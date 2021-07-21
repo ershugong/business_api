@@ -1,10 +1,10 @@
-package ${package.Controller};
+package cn.ag.channel.controller;
 
-import ${package.Service}.${table.serviceName};
-import ${package.Entity}.${entity};
-import ${cfg.basePath}.query.${entity}Query;
-import ${cfg.basePath}.jsonResult.JsonResult;
-import ${cfg.basePath}.jsonResult.PageList;
+import cn.ag.channel.service.IRoleInfoService;
+import cn.ag.channel.model.RoleInfo;
+import cn.ag.channel.query.RoleInfoQuery;
+import cn.ag.channel.jsonResult.JsonResult;
+import cn.ag.channel.jsonResult.PageList;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,27 +14,27 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 
 @RestController
-@Api(tags = "${table.comment}")
-@RequestMapping("/${table.entityPath}")
-public class ${entity}Controller {
+@Api(tags = "角色信息")
+@RequestMapping("/roleInfo")
+public class RoleInfoController {
     @Autowired
-    public ${table.serviceName} ${table.entityPath}Service;
+    public IRoleInfoService roleInfoService;
 
     /**
      * 保存和修改公用的
-     * @param ${table.entityPath}  传递的实体
+     * @param roleInfo  传递的实体
      * @return Ajaxresult转换结果
      */
     @ApiOperation("保存和修改公用的")
     @RequestMapping(value="/save",method= RequestMethod.POST)
-    public JsonResult save(@RequestBody ${entity} ${table.entityPath}){
+    public JsonResult save(@RequestBody RoleInfo roleInfo){
         try {
-            if(${table.entityPath}.getId()!=null){
-                    ${table.entityPath}Service.updateById(${table.entityPath});
+            if(roleInfo.getId()!=null){
+                    roleInfoService.updateById(roleInfo);
             }else{
-                    ${table.entityPath}Service.save(${table.entityPath});
+                    roleInfoService.save(roleInfo);
             }
-            return JsonResult.success(${table.entityPath});
+            return JsonResult.success(roleInfo);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail("保存失败");
@@ -50,7 +50,7 @@ public class ${entity}Controller {
     @RequestMapping(value="/{id}",method=RequestMethod.DELETE)
     public JsonResult delete(@PathVariable("id") Long id){
         try {
-                ${table.entityPath}Service.removeById(id);
+                roleInfoService.removeById(id);
             return JsonResult.success(id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,8 +65,8 @@ public class ${entity}Controller {
     */
     @ApiOperation("通过id获取对象信息")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public JsonResult<${entity}> get(@PathVariable("id")Long id) {
-        return JsonResult.success(${table.entityPath}Service.getById(id));
+    public JsonResult<RoleInfo> get(@PathVariable("id")Long id) {
+        return JsonResult.success(roleInfoService.getById(id));
     }
 
 
@@ -76,8 +76,8 @@ public class ${entity}Controller {
     */
     @ApiOperation("查看所有信息")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public JsonResult<List<${entity}>> list(){
-        return JsonResult.success(${table.entityPath}Service.list());
+    public JsonResult<List<RoleInfo>> list(){
+        return JsonResult.success(roleInfoService.list());
     }
 
 
@@ -89,9 +89,9 @@ public class ${entity}Controller {
     */
     @ApiOperation("分页查询数据")
     @RequestMapping(value = "/pageList",method = RequestMethod.POST)
-    public JsonResult<PageList<${entity}>> pageList(@RequestBody ${entity}Query query) {
-        Page<${entity}> page = new Page<${entity}>(query.getPageIndex(),query.getPageSize());
-        IPage<${entity}> pageResult = ${table.entityPath}Service.page(page);
+    public JsonResult<PageList<RoleInfo>> pageList(@RequestBody RoleInfoQuery query) {
+        Page<RoleInfo> page = new Page<RoleInfo>(query.getPageIndex(),query.getPageSize());
+        IPage<RoleInfo> pageResult = roleInfoService.page(page);
         return JsonResult.success(PageList.restPage(pageResult));
     }
 }

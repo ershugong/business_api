@@ -7,6 +7,7 @@ import cn.ag.channel.model.User;
 import cn.ag.channel.query.BookQuery;
 import cn.ag.channel.service.ITestService;
 import cn.ag.channel.util.JwtUtils;
+import cn.ag.channel.util.RedisUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -29,6 +30,9 @@ public class TestController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisUtils redisUtils;
 
     @GetMapping("/sayHello")
     public String sayHello(){
@@ -78,5 +82,10 @@ public class TestController {
         map.put("id",user.getId());
         String token = JwtUtils.createJwtToken(map);
         return JsonResult.success("Bearer " + token);
+    }
+
+    @RequestMapping(value = "/getRedisValue",method = RequestMethod.POST)
+    public JsonResult getRedisValue(String key){
+        return JsonResult.success(redisUtils.get(key));
     }
 }

@@ -1,12 +1,15 @@
-package ${package.Controller};
+package cn.ag.channel.controller;
 
-import ${package.Service}.${table.serviceName};
-import ${package.Entity}.${entity};
-import ${cfg.basePath}.query.${entity}Query;
-import ${cfg.basePath}.jsonResult.JsonResult;
-import ${cfg.basePath}.jsonResult.PageList;
+import cn.ag.channel.service.IUserInfoService;
+import cn.ag.channel.model.UserInfo;
+import cn.ag.channel.query.UserInfoQuery;
+import cn.ag.channel.jsonResult.JsonResult;
+import cn.ag.channel.jsonResult.PageList;
+import cn.ag.channel.util.MD5Util;
+import cn.ag.channel.vo.UserMenuInfoVO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
@@ -14,27 +17,28 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 
 @RestController
-@Api(tags = "${table.comment}")
-@RequestMapping("/${table.entityPath}")
-public class ${entity}Controller {
+@Api(tags = "用户信息")
+@RequestMapping("/userInfo")
+public class UserInfoController {
     @Autowired
-    public ${table.serviceName} ${table.entityPath}Service;
+    public IUserInfoService userInfoService;
 
     /**
      * 保存和修改公用的
-     * @param ${table.entityPath}  传递的实体
+     * @param userInfo  传递的实体
      * @return Ajaxresult转换结果
      */
     @ApiOperation("保存和修改公用的")
     @RequestMapping(value="/save",method= RequestMethod.POST)
-    public JsonResult save(@RequestBody ${entity} ${table.entityPath}){
+    public JsonResult save(@RequestBody UserInfo userInfo){
         try {
-            if(${table.entityPath}.getId()!=null){
-                    ${table.entityPath}Service.updateById(${table.entityPath});
+            userInfo.setPassword(MD5Util.EncoderByMd5(userInfo.getPassword()));
+            if(userInfo.getId()!=null){
+                    userInfoService.updateById(userInfo);
             }else{
-                    ${table.entityPath}Service.save(${table.entityPath});
+                    userInfoService.save(userInfo);
             }
-            return JsonResult.success(${table.entityPath});
+            return JsonResult.success(userInfo);
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.fail("保存失败");
@@ -50,7 +54,7 @@ public class ${entity}Controller {
     @RequestMapping(value="/{id}",method=RequestMethod.DELETE)
     public JsonResult delete(@PathVariable("id") Long id){
         try {
-                ${table.entityPath}Service.removeById(id);
+                userInfoService.removeById(id);
             return JsonResult.success(id);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,8 +69,8 @@ public class ${entity}Controller {
     */
     @ApiOperation("通过id获取对象信息")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public JsonResult<${entity}> get(@PathVariable("id")Long id) {
-        return JsonResult.success(${table.entityPath}Service.getById(id));
+    public JsonResult<UserInfo> get(@PathVariable("id")Long id) {
+        return JsonResult.success(userInfoService.getById(id));
     }
 
 
@@ -76,8 +80,8 @@ public class ${entity}Controller {
     */
     @ApiOperation("查看所有信息")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public JsonResult<List<${entity}>> list(){
-        return JsonResult.success(${table.entityPath}Service.list());
+    public JsonResult<List<UserInfo>> list(){
+        return JsonResult.success(userInfoService.list());
     }
 
 
@@ -89,9 +93,15 @@ public class ${entity}Controller {
     */
     @ApiOperation("分页查询数据")
     @RequestMapping(value = "/pageList",method = RequestMethod.POST)
-    public JsonResult<PageList<${entity}>> pageList(@RequestBody ${entity}Query query) {
-        Page<${entity}> page = new Page<${entity}>(query.getPageIndex(),query.getPageSize());
-        IPage<${entity}> pageResult = ${table.entityPath}Service.page(page);
+    public JsonResult<PageList<UserInfo>> pageList(@RequestBody UserInfoQuery query) {
+        Page<UserInfo> page = new Page<UserInfo>(query.getPageIndex(),query.getPageSize());
+        IPage<UserInfo> pageResult = userInfoService.page(page);
         return JsonResult.success(PageList.restPage(pageResult));
+    }
+
+    @ApiOperation("用户登录")
+    @RequestMapping(value = "/userLogin",method = RequestMethod.POST)
+    public JsonResult<UserMenuInfoVO> userLogin(@RequestBody UserInfo userInfo){
+        return JsonResult.success(userInfoService.userLogin(userInfo));
     }
 }
