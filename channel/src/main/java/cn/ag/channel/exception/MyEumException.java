@@ -7,8 +7,8 @@ public enum MyEumException {
 
     TEST_1(789,"TEST1 自定义异常"),
     TEST_2(788,"TEST2 自定义异常"),
-    TOKEN_TIME_OUT(401,"令牌已失效,请重新登录"),
-    TOKEN_GET_FAIL(456,"令牌获取失败，未知错误"),
+    TOKEN_TIME_OUT(401,"账号信息过期,请重新登录"),
+    TOKEN_GET_FAIL(456,"账号信息获取失败，未知错误"),
     ;
 
     private int code;

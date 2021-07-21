@@ -7,10 +7,13 @@ import cn.ag.channel.jsonResult.JsonResult;
 import cn.ag.channel.jsonResult.PageList;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Api(tags = "用户信息接口")
 @RequestMapping("/user")
 public class UserController {
     @Autowired
@@ -21,6 +24,7 @@ public class UserController {
      * @param user  传递的实体
      * @return Ajaxresult转换结果
      */
+    @ApiOperation("添加用户")
     @RequestMapping(value="/save",method= RequestMethod.POST)
     public JsonResult save(@RequestBody User user){
         try {

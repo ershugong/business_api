@@ -21,6 +21,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         Map<Object, Object> map = new HashMap<>();
         //如果是OPTIONS请求 直接放行
         String method = request.getMethod();
+        System.out.println(request.getRequestURL());
         JsonResult jsonResult;
         try {
             if(method.equals("OPTIONS")){

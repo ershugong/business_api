@@ -12,9 +12,10 @@ spring:
     host: 127.0.0.1
     port: 6379
 
-#不拦截请求的路径  多个以,隔开
+#不拦截请求的路径  多个以,隔开 /swagger-ui.html,/swagger-resources/**,/v2/**,/webjars/**,/csrf,/   是swagger2接口文档的链接
 interceptor:
-  excludePath: /test/**,/abc/**
+  excludePath: /test/**,/abc/**,/swagger-ui.html,/swagger-resources/**,/v2/**,/webjars/**,/csrf,/error,/
+
 
 logging:
   level:
