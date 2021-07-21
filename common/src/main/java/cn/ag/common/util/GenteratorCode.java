@@ -39,10 +39,10 @@ public class GenteratorCode {
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[] { "t_" });// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setInclude(new String[]{
-                "t_book",
+                "tb_auth_info","tb_auth_menu_relation","tb_menu_info","tb_role_auth_relation","tb_role_info","tb_user_info",
         }); // 需要生成的表
         mpg.setStrategy(strategy);
         // 包配置
