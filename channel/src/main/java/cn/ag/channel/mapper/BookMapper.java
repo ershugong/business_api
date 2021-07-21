@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 书本信息 Mapper 接口
  * </p>
  *
  * @author cmx
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 public interface BookMapper extends BaseMapper<Book> {
 

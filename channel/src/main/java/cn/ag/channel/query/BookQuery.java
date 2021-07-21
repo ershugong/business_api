@@ -4,7 +4,7 @@ import cn.ag.channel.jsonResult.BaseQuery;
 /**
  *
  * @author cmx
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 public class BookQuery extends BaseQuery{
 }

@@ -9,8 +9,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(tags = "书本信息")
 @RequestMapping("/book")
 public class BookController {
     @Autowired
@@ -21,6 +24,7 @@ public class BookController {
      * @param book  传递的实体
      * @return Ajaxresult转换结果
      */
+    @ApiOperation("保存和修改公用的")
     @RequestMapping(value="/save",method= RequestMethod.POST)
     public JsonResult save(@RequestBody Book book){
         try {
@@ -41,6 +45,7 @@ public class BookController {
     * @param id
     * @return
     */
+    @ApiOperation("删除对象信息")
     @RequestMapping(value="/{id}",method=RequestMethod.DELETE)
     public JsonResult delete(@PathVariable("id") Long id){
         try {
@@ -52,7 +57,12 @@ public class BookController {
         }
     }
 
-    //获取通过id
+    /**
+    * 通过id获取对象信息
+    * @param id
+    * @return
+    */
+    @ApiOperation("通过id获取对象信息")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     public JsonResult get(@PathVariable("id")Long id) {
         return JsonResult.success(bookService.getById(id));
@@ -63,6 +73,7 @@ public class BookController {
     * 查看所有信息
     * @return
     */
+    @ApiOperation("查看所有信息")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public JsonResult list(){
         return JsonResult.success(bookService.list());
@@ -75,6 +86,7 @@ public class BookController {
     * @param query 查询对象
     * @return PageList 分页对象
     */
+    @ApiOperation("分页查询数据")
     @RequestMapping(value = "/pageList",method = RequestMethod.POST)
     public JsonResult pageList(@RequestBody BookQuery query) {
         Page<Book> page = new Page<Book>(query.getPageIndex(),query.getPageSize());

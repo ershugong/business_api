@@ -21,6 +21,7 @@ public class GenteratorCode {
         GlobalConfig gc = new GlobalConfig();
         gc.setOutputDir(rb.getString("OutputDir"));
         gc.setFileOverride(true);
+        gc.setSwagger2(true);//实体属性swagger2 注解
         gc.setActiveRecord(true);// 开启 activeRecord 模式
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
@@ -38,10 +39,10 @@ public class GenteratorCode {
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "t_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         strategy.setInclude(new String[]{
-                "tb_user",
+                "t_book",
         }); // 需要生成的表
         mpg.setStrategy(strategy);
         // 包配置

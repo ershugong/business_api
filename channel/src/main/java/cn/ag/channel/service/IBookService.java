@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- *  服务类
+ * 书本信息 服务类
  * </p>
  *
  * @author cmx
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 public interface IBookService extends IService<Book> {
 

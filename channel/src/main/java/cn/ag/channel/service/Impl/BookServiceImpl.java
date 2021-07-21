@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 书本信息 服务实现类
  * </p>
  *
  * @author cmx
- * @since 2021-07-20
+ * @since 2021-07-21
  */
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IBookService {
