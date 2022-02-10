@@ -65,10 +65,10 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         }
 
         //判断当前用户账号密码 是否正确
-        QueryWrapper<UserInfo> userInfoWrapper = new QueryWrapper<>();
-        userInfoWrapper.eq("user_name",userInfo.getUserName());
-        userInfoWrapper.eq("password",password);
-        UserInfo userInfoResult = userInfoMapper.selectOne(userInfoWrapper);
+        UserInfo userInfoResult = userInfoMapper.selectOne(
+                new LambdaQueryWrapper<UserInfo>()
+                        .eq(UserInfo::getUserName,userInfo.getUserName())
+                        .eq(UserInfo::getPassword,password));
         userInfoResult.setPassword("");
         if(userInfoResult == null){
             throw new MyException(481,"账号密码不正确!");
