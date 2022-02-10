@@ -39,11 +39,11 @@ public class GenteratorCode {
         mpg.setDataSource(dsc);
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setTablePrefix(new String[] { "tb_" });// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[] { "t_" });// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
         //strategy.setLogicDeleteFieldName("deleted");//todo 逻辑删除策略
         strategy.setInclude(new String[]{
-                "tb_auth_info","tb_auth_menu_relation","tb_menu_info","tb_role_auth_relation","tb_role_info","tb_user_info",
+                "t_book"
         }); // 需要生成的表
         mpg.setStrategy(strategy);
         // 包配置
@@ -51,7 +51,7 @@ public class GenteratorCode {
         pc.setParent(rb.getString("parent")); //基本包 edu.lzy
         pc.setController("controller");
         pc.setService("service");
-        pc.setServiceImpl("service.impl");
+        pc.setServiceImpl("service.Impl");
         pc.setEntity("model");
         pc.setMapper("mapper");
 //        pc.setModuleName("cn.ag.channel");

@@ -1,0 +1,10 @@
+package ${cfg.basePath}.mapper;
+
+import ${package.Entity}.${entity};
+import cn.ag.channel.config.SelfMapper;
+/**
+ * @author ${author}
+ * @since ${date}
+ */
+public interface ${table.entityName}Mapper extends SelfMapper<${table.entityName}>{
+}

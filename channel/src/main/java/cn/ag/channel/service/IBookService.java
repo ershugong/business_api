@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author cmx
- * @since 2021-07-21
+ * @since 2022-02-10
  */
 public interface IBookService extends IService<Book> {
 

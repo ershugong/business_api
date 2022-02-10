@@ -1,4 +1,4 @@
-package cn.ag.channel.service.impl;
+package cn.ag.channel.service.Impl;
 
 import cn.ag.channel.model.Book;
 import cn.ag.channel.mapper.BookMapper;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author cmx
- * @since 2021-07-21
+ * @since 2022-02-10
  */
 @Service
 public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements IBookService {

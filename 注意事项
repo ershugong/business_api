@@ -1,0 +1,7 @@
+分支介绍：
+分支以init_swagger_v2为主，作为空白框架开发
+SpringBoot+mybatis-plus+redis+jwt+swagger
+
+master:SpringBoot+mybatis-plus+redis
+
+role_center：SpringBoot+mybatis-plus+redis+jwt+swagger + 简易的用户权限中心

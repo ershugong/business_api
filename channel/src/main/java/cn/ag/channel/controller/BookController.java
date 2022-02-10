@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.List;
 
 @RestController
 @Api(tags = "书本信息")
@@ -64,7 +65,7 @@ public class BookController {
     */
     @ApiOperation("通过id获取对象信息")
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    public JsonResult get(@PathVariable("id")Long id) {
+    public JsonResult<Book> get(@PathVariable("id")Long id) {
         return JsonResult.success(bookService.getById(id));
     }
 
@@ -75,7 +76,7 @@ public class BookController {
     */
     @ApiOperation("查看所有信息")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public JsonResult list(){
+    public JsonResult<List<Book>> list(){
         return JsonResult.success(bookService.list());
     }
 
@@ -88,9 +89,9 @@ public class BookController {
     */
     @ApiOperation("分页查询数据")
     @RequestMapping(value = "/pageList",method = RequestMethod.POST)
-    public JsonResult pageList(@RequestBody BookQuery query) {
+    public JsonResult<PageList<Book>> pageList(@RequestBody BookQuery query) {
         Page<Book> page = new Page<Book>(query.getPageIndex(),query.getPageSize());
-        IPage pageResult = bookService.page(page);
+        IPage<Book> pageResult = bookService.page(page);
         return JsonResult.success(PageList.restPage(pageResult));
     }
 }

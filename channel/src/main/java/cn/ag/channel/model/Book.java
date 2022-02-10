@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author cmx
- * @since 2021-07-21
+ * @since 2022-02-10
  */
 @TableName("t_book")
 @ApiModel(value="Book对象", description="书本信息")

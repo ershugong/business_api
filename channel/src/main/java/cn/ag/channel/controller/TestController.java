@@ -2,6 +2,7 @@ package cn.ag.channel.controller;
 
 import cn.ag.channel.jsonResult.JsonResult;
 import cn.ag.channel.jsonResult.PageList;
+import cn.ag.channel.mapper.BookMapper;
 import cn.ag.channel.model.Book;
 import cn.ag.channel.model.User;
 import cn.ag.channel.query.BookQuery;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +32,9 @@ public class TestController {
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private BookMapper bookMapper;
 
     @GetMapping("/sayHello")
     public String sayHello(){
@@ -78,5 +84,27 @@ public class TestController {
         map.put("id",user.getId());
         String token = JwtUtils.createJwtToken(map);
         return JsonResult.success("Bearer " + token);
+    }
+
+    /**
+     * 批量插入测试
+     * @return
+     */
+    @RequestMapping(value = "/batchInsert",method = RequestMethod.GET)
+    public JsonResult batchInsert(){
+        List<Book> bookList = new ArrayList<>();
+        Book book = new Book();
+        book.setPrice(BigDecimal.valueOf(1));
+        book.setBookName("C++");
+        Book book1 = new Book();
+        book1.setPrice(BigDecimal.valueOf(2));
+        book1.setBookName("C++");
+        Book book2 = new Book();
+        book2.setPrice(BigDecimal.valueOf(3));
+        book2.setBookName("C++");
+        bookList.add(book);
+        bookList.add(book1);
+        bookList.add(book2);
+        return JsonResult.success(bookMapper.insertBatchSomeColumn(bookList));
     }
 }
