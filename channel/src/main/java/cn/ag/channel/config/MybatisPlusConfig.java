@@ -11,4 +11,9 @@ public class MybatisPlusConfig {
     public PaginationInterceptor paginationInterceptor() {
         return new PaginationInterceptor();
     }
+
+    @Bean
+    public EasySqlInjector easySqlInjector(){
+        return new EasySqlInjector();
+    }
 }

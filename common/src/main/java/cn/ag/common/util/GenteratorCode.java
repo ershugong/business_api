@@ -49,7 +49,7 @@ public class GenteratorCode {
         pc.setParent(rb.getString("parent")); //基本包 edu.lzy
         pc.setController("controller");
         pc.setService("service");
-        pc.setServiceImpl("service.impl");
+        pc.setServiceImpl("service.Impl");
         pc.setEntity("model");
         pc.setMapper("mapper");
 //        pc.setModuleName("cn.ag.channel");

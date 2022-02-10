@@ -81,4 +81,13 @@ public class BookController {
         IPage pageResult = bookService.page(page);
         return JsonResult.success(PageList.restPage(pageResult));
     }
+
+    /**
+     * 批量插入
+     * @return
+     */
+    @RequestMapping(value = "/batchInsetBook",method = RequestMethod.GET)
+    public JsonResult batchInsetBook(){
+        return JsonResult.success(bookService.insertBatchSomeColumn());
+    }
 }

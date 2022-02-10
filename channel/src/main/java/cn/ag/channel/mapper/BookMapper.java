@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author cmx
  * @since 2021-07-20
  */
-public interface BookMapper extends BaseMapper<Book> {
+public interface BookMapper extends EasyBaseMapper<Book> {
 
 }
